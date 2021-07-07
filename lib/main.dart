@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:thiss/Carousel_page.dart';
 import 'package:thiss/Coverterpage.dart';
+import 'package:thiss/Devpage.dart';
 import 'package:thiss/Mydrawer.dart';
+import 'package:thiss/Nepse_page.dart';
 import 'package:thiss/Newsdata.dart';
 import 'package:thiss/Vege.dart';
 import 'package:thiss/Weather_update.dart';
+import 'package:thiss/about_us.dart';
 import 'package:thiss/covid_page.dart';
 
 void main() => runApp(MyApp());
@@ -21,7 +25,7 @@ class MyApp extends StatelessWidget {
             'Today Market Price (Kalimati)',
           ),
         ),
-        body: HomePage(),
+        body: CarouselPage(),
         drawer: MyDrawer(),
       ),
       initialRoute: '/',
@@ -31,6 +35,9 @@ class MyApp extends StatelessWidget {
         '/forth': (context) => Converter(),
         '/fifth': (context) => NewsPage(),
         '/covid': (context) => CovidPage(),
+        '/sharebazar': (context) => NepsePage(),
+        '/aboutus': (context) => AboutUs(),
+        '/devops': (context) => DevPage(),
       },
     );
   }

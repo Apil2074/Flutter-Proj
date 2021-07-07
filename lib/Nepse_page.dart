@@ -2,29 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class HomePage extends StatefulWidget {
+class NepsePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  NepsePageState createState() => NepsePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class NepsePageState extends State<NepsePage> {
+  Color _genColor(num websitey) {
+    if (websitey >= 0) {
+      return Colors.green;
+    } else {
+      return Colors.red;
+    }
+  }
+
   TextStyle topStyle = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.bold,
     color: Colors.red,
   );
+
 // feilds
   String url;
   var response;
   var data;
   bool isLoading = true;
 
-  // https://script.googleusercontent.com/macros/echo?user_content_key=Pjz-x9OzK-ngLPsL1aPu82nL_UVSwU_tI_102Sm5lreqtvgBI1E9Jv7RFr156NJUt_V95CbM59GBxAUEpHAh9mtDPLc0UArlm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnPJwHFeySB5km4dKeSKaycA4dGxSqvkOgXlRTP4M9HL-RqyVb7A58pt2xzrQCnF_EHkOIhvrlj80eK3azzgFwIFAHa7lkDWJvw&lib=MCDm9COUPCaHwSix82Zi4QG_2HC8b9XOb
-
 // future method -> api data -> response -> decode
   Future fetchData() async {
     url =
-        "https://script.googleusercontent.com/macros/echo?user_content_key=Pjz-x9OzK-ngLPsL1aPu82nL_UVSwU_tI_102Sm5lreqtvgBI1E9Jv7RFr156NJUt_V95CbM59GBxAUEpHAh9mtDPLc0UArlm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnPJwHFeySB5km4dKeSKaycA4dGxSqvkOgXlRTP4M9HL-RqyVb7A58pt2xzrQCnF_EHkOIhvrlj80eK3azzgFwIFAHa7lkDWJvw&lib=MCDm9COUPCaHwSix82Zi4QG_2HC8b9XOb";
+        "https://script.googleusercontent.com/macros/echo?user_content_key=--wRDwnZG_2QhEhbCXIHOeU9meVxlc0gSvwjtxwrSmwz6mv24YIGM1hLjLQAW6k2JrRDAEt8p6x7v3wsaNZfC7MR0U8_0Naem5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnHU4Uq_5UPHL8yGiyF09dkj5sqt9_qlcB5VOMD9UP7tJTbKprB3MXbD7fY36rtqZlafneVCrUKHtWTv9-JQJo5aQe_wdodf5Sg&lib=MosiUpOaTzmWZJVzgA2PlSW_2HC8b9XOb";
 
     response = await http.get(url);
 
@@ -44,7 +51,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Today's Vegetable Rate"),
+        title: Text("Today's Stock Price"),
         bottom: PreferredSize(
           child: Container(
             color: Colors.white,
@@ -54,30 +61,28 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 150,
-                      child: Text(
-                        "Commodity",
-                        style: topStyle,
-                      ),
-                    ),
-                  ),
                   Text(
-                    "Unit",
+                    "Symbol",
                     style: topStyle,
                   ),
                   Text(
-                    "Maximun",
+                    "Closing Price",
                     style: topStyle,
                   ),
                   Text(
-                    "Minimum",
+                    "% Change",
                     style: topStyle,
                   ),
                   Text(
-                    "Average",
+                    "Max Price",
+                    style: topStyle,
+                  ),
+                  Text(
+                    "Min Price",
+                    style: topStyle,
+                  ),
+                  Text(
+                    "Opening Price",
                     style: topStyle,
                   ),
                 ],
@@ -99,39 +104,61 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          width: 150,
+                          width: 70,
                           child: Text(
-                            data[index]['commodity'],
+                            data[index]['symbol'],
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Container(
+                          alignment: Alignment.topLeft,
                           child: Text(
-                            data[index]['unit'],
+                            data[index]['closing'].toString(),
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold),
                           ),
+                          width: 70,
                         ),
                         Container(
+                          alignment: Alignment.center,
                           child: Text(
-                            data[index]['minimum'].toString(),
+                            data[index]['pchange'].toString(),
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold,
+                              color: _genColor(data[index]['pchange']),
+                            ),
+                          ),
+                          width: 55,
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            data[index]['max'].toString(),
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold),
                           ),
+                          width: 80,
                         ),
                         Container(
                           child: Text(
-                            data[index]['maximun'].toString(),
+                            data[index]['min'].toString(),
                             style: TextStyle(
                                 fontSize: 15.0, fontWeight: FontWeight.bold),
                           ),
+                          width: 55,
                         ),
-                        Container(
-                          child: Text(
-                            data[index]['average'].toString(),
-                            style: TextStyle(
-                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              data[index]['open'].toString(),
+                              style: TextStyle(
+                                  fontSize: 15.0, fontWeight: FontWeight.bold),
+                            ),
+                            width: 60,
                           ),
                         ),
                       ],

@@ -44,6 +44,13 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
+              Navigator.pushNamed(context, '/third');
+            },
+            title: Text("Kalimati Market Price"),
+            leading: Icon(Icons.cloud),
+          ),
+          ListTile(
+            onTap: () {
               Navigator.pushNamed(context, '/forth');
             },
             title: Text("Land Unit Converter"),
@@ -60,8 +67,29 @@ class MyDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(context, '/covid');
             },
-            title: Text("Weather"),
+            title: Text("COVID-19"),
             leading: Icon(Icons.coronavirus_rounded),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, '/sharebazar');
+            },
+            title: Text("Nepali Share Bazar"),
+            leading: Icon(Icons.auto_graph),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, '/aboutus');
+            },
+            title: Text("About us"),
+            leading: Icon(Icons.info),
+          ),
+          ListTile(
+            onTap: () {
+              Navigator.pushNamed(context, '/devops');
+            },
+            title: Text("Developer Info"),
+            leading: Icon(Icons.info),
           ),
         ],
       ),
