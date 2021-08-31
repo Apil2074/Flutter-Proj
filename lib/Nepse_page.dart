@@ -10,14 +10,14 @@ class NepsePage extends StatefulWidget {
 class NepsePageState extends State<NepsePage> {
   Color _genColor(num websitey) {
     if (websitey >= 0) {
-      return Colors.green;
+      return Colors.green[300];
     } else {
-      return Colors.red;
+      return Colors.red[200];
     }
   }
 
   TextStyle topStyle = TextStyle(
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: FontWeight.bold,
     color: Colors.red,
   );
@@ -27,6 +27,8 @@ class NepsePageState extends State<NepsePage> {
   var response;
   var data;
   bool isLoading = true;
+
+  // final TextEditingController _filter = new TextEditingController();
 
 // future method -> api data -> response -> decode
   Future fetchData() async {
@@ -47,10 +49,20 @@ class NepsePageState extends State<NepsePage> {
     fetchData();
   }
 
+// }))
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              print("Printed in Console");
+              // _searchPressed,
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
         title: Text("Today's Stock Price"),
         bottom: PreferredSize(
           child: Container(
@@ -98,17 +110,18 @@ class NepsePageState extends State<NepsePage> {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 return Card(
+                  color: _genColor(data[index]['pchange']),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          width: 70,
+                          width: 60,
                           child: Text(
                             data[index]['symbol'],
                             style: TextStyle(
-                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                                fontSize: 13.0, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Container(
@@ -116,18 +129,18 @@ class NepsePageState extends State<NepsePage> {
                           child: Text(
                             data[index]['closing'].toString(),
                             style: TextStyle(
-                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                                fontSize: 13.0, fontWeight: FontWeight.bold),
                           ),
-                          width: 70,
+                          width: 50,
                         ),
                         Container(
                           alignment: Alignment.center,
                           child: Text(
                             data[index]['pchange'].toString(),
                             style: TextStyle(
-                              fontSize: 15.0,
+                              fontSize: 13.0,
                               fontWeight: FontWeight.bold,
-                              color: _genColor(data[index]['pchange']),
+                              // color: _genColor(data[index]['pchange']),
                             ),
                           ),
                           width: 55,
@@ -137,26 +150,26 @@ class NepsePageState extends State<NepsePage> {
                           child: Text(
                             data[index]['max'].toString(),
                             style: TextStyle(
-                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                                fontSize: 13.0, fontWeight: FontWeight.bold),
                           ),
-                          width: 80,
+                          width: 60,
                         ),
                         Container(
                           child: Text(
                             data[index]['min'].toString(),
                             style: TextStyle(
-                                fontSize: 15.0, fontWeight: FontWeight.bold),
+                                fontSize: 13.0, fontWeight: FontWeight.bold),
                           ),
-                          width: 55,
+                          width: 40,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Container(
-                            alignment: Alignment.center,
+                            alignment: Alignment.centerLeft,
                             child: Text(
                               data[index]['open'].toString(),
                               style: TextStyle(
-                                  fontSize: 15.0, fontWeight: FontWeight.bold),
+                                  fontSize: 13.0, fontWeight: FontWeight.bold),
                             ),
                             width: 60,
                           ),

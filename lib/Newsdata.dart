@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 
 class NewsPage extends StatefulWidget {
+  // NewsPage(String s);
+
   @override
   _NewsPageState createState() => _NewsPageState();
 }
@@ -59,7 +61,10 @@ class _NewsPageState extends State<NewsPage> {
                 return Card(
                   child: Column(
                     children: [
-                      Image.network(data[index]['imglink']),
+                      Image.network(
+                        data[index]['imglink'],
+                        scale: 0.5,
+                      ),
                       ListTile(
                         trailing: OutlinedButton(
                           onPressed: () {

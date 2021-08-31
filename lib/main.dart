@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:thiss/Carousel_page.dart';
+import 'package:thiss/Agriculture_page.dart';
 import 'package:thiss/Coverterpage.dart';
 import 'package:thiss/Devpage.dart';
+import 'package:thiss/Loksewa.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:thiss/Mydrawer.dart';
 import 'package:thiss/Nepse_page.dart';
 import 'package:thiss/Newsdata.dart';
@@ -9,8 +13,16 @@ import 'package:thiss/Vege.dart';
 import 'package:thiss/Weather_update.dart';
 import 'package:thiss/about_us.dart';
 import 'package:thiss/covid_page.dart';
+import 'package:thiss/page/home_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(MyApp());
+Future main() async {
+  await Hive.initFlutter();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,14 +30,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Land Unit Converter',
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        fontFamily: 'StyleScript-Regular',
+      ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Today Market Price (Kalimati)',
-          ),
-        ),
-        body: CarouselPage(),
+        body: HomeePage(),
         drawer: MyDrawer(),
       ),
       initialRoute: '/',
@@ -38,6 +48,8 @@ class MyApp extends StatelessWidget {
         '/sharebazar': (context) => NepsePage(),
         '/aboutus': (context) => AboutUs(),
         '/devops': (context) => DevPage(),
+        '/agriculture': (context) => AgPage(),
+        '/loksewa': (context) => Loksewa(),
       },
     );
   }

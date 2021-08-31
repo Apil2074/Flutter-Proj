@@ -8,6 +8,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  _genColor(int indeex) {
+    if (indeex % 2 == 0) {
+      return Colors.white;
+    } else {
+      return Colors.lightGreen[50];
+    }
+  }
+
   TextStyle topStyle = TextStyle(
     fontSize: 15,
     fontWeight: FontWeight.bold,
@@ -49,19 +57,16 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             color: Colors.white,
             child: Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      width: 150,
-                      child: Text(
-                        "Commodity",
-                        style: topStyle,
-                      ),
+                  Container(
+                    width: 120,
+                    child: Text(
+                      "Commodity",
+                      style: topStyle,
                     ),
                   ),
                   Text(
@@ -93,13 +98,15 @@ class _HomePageState extends State<HomePage> {
               itemCount: data.length,
               itemBuilder: (context, index) {
                 return Card(
+                  color: _genColor(index),
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(4.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Container(
-                          width: 150,
+                          alignment: Alignment.topLeft,
+                          width: 130,
                           child: Text(
                             data[index]['commodity'],
                             style: TextStyle(
@@ -107,6 +114,10 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
+                          alignment: Alignment.topLeft,
+
+                          width: 40,
+                          // alignment: Alignment.topRight,
                           child: Text(
                             data[index]['unit'],
                             style: TextStyle(
@@ -114,6 +125,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
+                          width: 40,
                           child: Text(
                             data[index]['minimum'].toString(),
                             style: TextStyle(
@@ -121,6 +133,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
+                          width: 40,
                           child: Text(
                             data[index]['maximun'].toString(),
                             style: TextStyle(
@@ -128,6 +141,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Container(
+                          alignment: Alignment.topCenter,
+                          width: 50,
                           child: Text(
                             data[index]['average'].toString(),
                             style: TextStyle(

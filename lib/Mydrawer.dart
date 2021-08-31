@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:thiss/provider/google_sign_in.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -12,27 +18,33 @@ class MyDrawer extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    'https://pbs.twimg.com/media/DiZguTqWkAEKBgS.jpg',
-                  ),
+                  backgroundImage: NetworkImage(user.photoURL),
                   radius: 40.0,
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  "Apil Subedi",
+                  user.displayName,
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(height: 5),
                 Text(
-                  "PSCYOPATH",
+                  user.email,
                   style: TextStyle(color: Colors.white),
                 ),
+                // ElevatedButton(
+                //   onPressed: () {
+                //     final provider = Provider.of<GoogleSignInProvider>(context,
+                //         listen: false);
+                //     provider.logout();
+                //   },
+                //   child: Text('Logout'),
+                // )
               ],
             ),
             decoration: BoxDecoration(
-              color: Colors.green,
+              color: Colors.blue[900],
             ),
           ),
           ListTile(
@@ -43,12 +55,11 @@ class MyDrawer extends StatelessWidget {
             leading: Icon(Icons.cloud),
           ),
           ListTile(
-            onTap: () {
-              Navigator.pushNamed(context, '/third');
-            },
-            title: Text("Kalimati Market Price"),
-            leading: Icon(Icons.cloud),
-          ),
+              onTap: () {
+                Navigator.pushNamed(context, '/third');
+              },
+              title: Text("Kalimati Market Price"),
+              leading: Icon(Icons.food_bank)),
           ListTile(
             onTap: () {
               Navigator.pushNamed(context, '/forth');
@@ -72,6 +83,13 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
+              Navigator.pushNamed(context, '/agriculture');
+            },
+            title: Text("Agriculture"),
+            leading: Icon(Icons.info),
+          ),
+          ListTile(
+            onTap: () {
               Navigator.pushNamed(context, '/sharebazar');
             },
             title: Text("Nepali Share Bazar"),
@@ -79,10 +97,17 @@ class MyDrawer extends StatelessWidget {
           ),
           ListTile(
             onTap: () {
+              Navigator.pushNamed(context, '/loksewa');
+            },
+            title: Text("LokSewa Capsule"),
+            leading: Icon(Icons.book_online),
+          ),
+          ListTile(
+            onTap: () {
               Navigator.pushNamed(context, '/aboutus');
             },
             title: Text("About us"),
-            leading: Icon(Icons.info),
+            leading: Icon(Icons.info_outline_sharp),
           ),
           ListTile(
             onTap: () {

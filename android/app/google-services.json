@@ -1,0 +1,31 @@
+{
+    "project_info": {
+        "project_number": "46770588529",
+        "project_id": "thiss-77f91",
+        "storage_bucket": "thiss-77f91.appspot.com"
+    },
+    "client": [{
+        "client_info": {
+            "mobilesdk_app_id": "1:46770588529:android:1b90fc956890bda6cec4d0",
+            "android_client_info": {
+                "package_name": "com.example.thiss"
+            }
+        },
+        "oauth_client": [{
+            "client_id": "46770588529-kcncmftupv08glre137jiqah9qd3vh0a.apps.googleusercontent.com",
+            "client_type": 3
+        }],
+        "api_key": [{
+            "current_key": "AIzaSyCMw2Sqpq7u_vmVJvJGb2ZCwlLJx0wK9Uw"
+        }],
+        "services": {
+            "appinvite_service": {
+                "other_platform_oauth_client": [{
+                    "client_id": "46770588529-kcncmftupv08glre137jiqah9qd3vh0a.apps.googleusercontent.com",
+                    "client_type": 3
+                }]
+            }
+        }
+    }],
+    "configuration_version": "1"
+}
